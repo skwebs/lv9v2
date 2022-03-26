@@ -20,22 +20,24 @@ Route::get('/', function () {
 });
 */
 
-Route::resource('class', App\Http\Controllers\ClazzController::class);
-
-Route::resource('admitCard', AdmitCardController::class);
 
 Route::controller(AdmitCardController::class)->group(function(){
     
-    Route::get('/', 'admin_homepage');
+    Route::get('/', function(){
+	    return redirect()->route('admitCard.index');
+    });
     
 	Route::get('/admitCard/upload-image/{admitCard}', 'upload_image')->name('admitCard.upload_image');
 	
 	Route::post('/admitCard/save-image/{admitCard}', 'save_image')->name('admitCard.save_image');
 	
-	Route::get('/admitCards','admit_cards')->name('admitCard.admit_cards');
+	Route::get('/admitCard/all','admit_cards')->name('admitCard.admit_cards');
 	
+	Route::get('admitCard/{admitCard}/view', 'view')->name('view');
 });
 
-Auth::routes();
+Route::resource('admitCard', AdmitCardController::class);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => 'prevent-back-history'],function(){
+	Auth::routes();
+});

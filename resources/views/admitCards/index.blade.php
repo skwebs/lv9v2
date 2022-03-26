@@ -1,7 +1,6 @@
 @extends('layouts.student_layout')
 
 @section('css')
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <style>
     td{white-space:nowrap;}
 </style>
@@ -28,9 +27,18 @@
 	                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
 		                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
 		                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+	                    <span class="d-none d-md-inline" > &nbsp; Add Student</span>
 	                    </svg>
                     </a>
-                    <a href="{{ route('admitCard.admit_cards') }}" class=" btn btn-primary">All Admit Cards</a>
+                    
+                    <h2 class="text-center" >Students List</h2>
+                    
+                    <a href="{{ route('admitCard.admit_cards') }}" class=" btn btn-primary">
+	                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-columns-reverse" viewBox="0 0 16 16">
+	                    <path fill-rule="evenodd" d="M0 .5A.5.5 0 0 1 .5 0h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 0 .5Zm4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10A.5.5 0 0 1 4 .5Zm-4 2A.5.5 0 0 1 .5 2h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 4h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 6h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 8h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5Z"/>
+	                    </svg>
+                    <span class="d-none d-md-inline" > &nbsp; All Admit Cards</span>
+                    </a>
                     </div>
                 </div>
 
@@ -41,12 +49,13 @@
                             <thead>
                                 <tr>
                                     <th class="text-nowrap" scope="col">#</th>
-                                    <th class="text-nowrap" scope="col">Id</th>
+                                    <!--<th class="text-nowrap" scope="col">Id</th>-->
                                     <th class="text-nowrap" scope="col">Images</th>
                                     <th class="text-nowrap" scope="col">Name</th>
                                     <th class="text-nowrap" scope="col">Class</th>
                                     <th class="text-nowrap" scope="col">Roll No.</th>
                                     <th class="text-nowrap" scope="col">Father's Name</th>
+                                    <th class="text-nowrap" scope="col">Mother's Name</th>
                                     <th class="text-nowrap" scope="col">Gender</th>
                                     <th class="text-nowrap" scope="col">D.O.B</th>
                                     <th class="text-nowrap" scope="col">Mobile</th>
@@ -62,7 +71,7 @@
                                 @foreach($admitCards as $admitCard)
                                 <tr>
                                     <th scope="row">{{$loop->index+1}}</th>
-                                    <td>{{$admitCard->id}}</td>
+                                    <!--<td>{{$admitCard->id}}</td>-->
 									<td>
 		                                @if($admitCard->image==null)
 			                                <a href="{{route('admitCard.upload_image',$admitCard->id)}}" type="button"
@@ -83,6 +92,7 @@
                                     <td>{{$admitCard->class}}</td>
                                     <td>{{$admitCard->roll}}</td>
                                     <td>{{$admitCard->father}}</td>
+                                    <td>{{$admitCard->mother}}</td>
                                     <td>{{$admitCard->gender}}</td>
                                     <td>{{$admitCard->dob}}</td>
                                     <td>{{$admitCard->mobile}}</td>

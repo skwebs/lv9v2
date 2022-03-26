@@ -53,7 +53,6 @@ class AdmitCardController extends Controller
         'address'   => 'required',
         'class'     => 'required', 
         'roll'      => 'numeric|required',
-        'student_type'=> 'required',
         ]);
         
         $request->mergeIfMissing(['created_by' => auth()->user()->name]);
@@ -112,7 +111,6 @@ class AdmitCardController extends Controller
         'address'   => 'required',
         'class'     => 'required', 
         'roll'      => 'numeric|required',
-        'student_type'=> 'required',
         ]);
         
         $request->mergeIfMissing(['updated_by' => auth()->user()->name]);

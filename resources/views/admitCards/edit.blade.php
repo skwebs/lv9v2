@@ -15,8 +15,22 @@
     display:inline-block;
     font-style:normal;
     }
+	.bi-asterisk{
+		    transform:translate(0, -5px);
+	}
+	.mandate{
+		transform:scale(1.5) translate(2px,0);
+		display:inline-block;
+	}
 </style>
 @endsection
+<?php
+	$mandat = '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="red" class="bi bi-asterisk" viewBox="0 0 16 16">
+	<path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+	</svg>';
+	$mandate = '<span class="text-danger mandate" >*</span>';
+?>
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -25,7 +39,12 @@
                 <div class="card-header">
 	                <div class="d-flex justify-content-between" >
 		                <span>{{ __('Update Student\'s Details') }}</span>
-		                <a class="btn btn-primary"  href="{{ route('admitCard.index')}}" >Go Back</a>
+		                <a class="btn btn-primary"  href="{{ route('admitCard.index')}}" >
+			                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+			                	<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+			                </svg>
+			                <span class="d-none d-md-inline" > &nbsp; Go Back</span>
+		                </a>
 	                </div>
                 </div>
 
@@ -65,7 +84,7 @@
                         <!-- name -->
                         <div class="row mb-3">
                             <label for="name"
-                                class="col-md-4 col-form-label text-md-end">{{ __('Student\'s Name*') }}</label>
+                                class="col-md-4 col-form-label text-md-end">{{ __('Student\'s Name') }}{!! $mandate !!}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
@@ -83,7 +102,7 @@
                         <!-- mother -->
                         <div class="row mb-3">
                             <label for="mother"
-                                class="col-md-4 col-form-label text-md-end">{{ __('Mother\'s Name') }}</label>
+                                class="col-md-4 col-form-label text-md-end">{{ __('Mother\'s Name') }}{!! $mandate !!}</label>
 
                             <div class="col-md-6">
                                 <input id="mother" type="text"
@@ -102,7 +121,7 @@
                         <!-- father -->
                         <div class="row mb-3">
                             <label for="father"
-                                class="col-md-4 col-form-label text-md-end">{{ __('Father\'s Name*') }}</label>
+                                class="col-md-4 col-form-label text-md-end">{{ __('Father\'s Name') }}{!! $mandate !!}</label>
 
                             <div class="col-md-6">
                                 <input id="father" type="text"
@@ -120,7 +139,7 @@
 
                         <!-- gender -->
                         <div class="row mb-3">
-                            <label class="col-md-4 col-form-label text-md-end">{{ __('Gender*') }}</label>
+                            <label class="col-md-4 col-form-label text-md-end">{{ __('Gender') }}{!! $mandate !!}</label>
 
                             <div class="col-md-6 mt-md-2">
 
@@ -148,7 +167,7 @@
                         <!-- date of birth -->
                         <div class="row mb-3">
                             <label for="dob"
-                                class="col-md-4 col-form-label text-md-end">{{ __('Date of Birth') }}</label>
+                                class="col-md-4 col-form-label text-md-end">{{ __('Date of Birth') }}{!! $mandate !!}</label>
 
                             <div class="col-md-6">
                                 <input id="dob" type="date" class="form-control @error('dob') is-invalid @enderror"
@@ -185,7 +204,7 @@
                         <!-- mobile -->
                         <div class="row mb-3">
                             <label for="mobile"
-                                class="col-md-4 col-form-label text-md-end">{{ __('Contact No.*') }}</label>
+                                class="col-md-4 col-form-label text-md-end">{{ __('Contact No.') }}{!! $mandate !!}</label>
 
                             <div class="col-md-6">
                                 <input id="mobile" type="tel" class="form-control @error('mobile') is-invalid @enderror"
@@ -203,7 +222,7 @@
 
                         <!-- address -->
                         <div class="row mb-3">
-                            <label for="address" class="col-md-4 col-form-label text-md-end">{{ __('Address*') }}</label>
+                            <label for="address" class="col-md-4 col-form-label text-md-end">{{ __('Address') }}{!! $mandate !!}</label>
 
                             <div class="col-md-6">
                                 <input id="address" type="text"
@@ -223,7 +242,7 @@
 
                         <!-- class -->
                         <div class="row mb-3">
-                            <label for="class" class="col-md-4 col-form-label text-md-end">{{ __('Class*') }}</label>
+                            <label for="class" class="col-md-4 col-form-label text-md-end">{{ __('Class') }}{!! $mandate !!}</label>
 
                             <div class="col-md-6">
 
@@ -262,7 +281,7 @@
 
                         <!-- roll no. -->
                         <div class="row mb-3">
-                            <label for="roll" class="col-md-4 col-form-label text-md-end">{{ __('Roll No.*') }}</label>
+                            <label for="roll" class="col-md-4 col-form-label text-md-end">{{ __('Roll No.') }}{!! $mandate !!}</label>
 
                             <div class="col-md-6">
                                 <input id="roll" type="number" class="form-control @error('roll') is-invalid @enderror"
@@ -278,9 +297,9 @@
                         </div>
                         <!-- //roll no. -->
 
-                        <!-- student type -->
+                        <!-- student type
                         <div class="row mb-3">
-                            <label class="col-md-4 col-form-label text-md-end">{{ __('Student Type*') }}</label>
+                            <label class="col-md-4 col-form-label text-md-end">{{ __('Student Type') }}{!! $mandate !!}</label>
 
                             <div class="col-md-6 pt-md-2">
 
