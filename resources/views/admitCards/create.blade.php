@@ -105,7 +105,7 @@
                             <div class="col-md-6">
                                 <input id="mother" type="text"
                                     class="form-control @error('mother') is-invalid @enderror" name="mother"
-                                    value="{{ old('mother') }}" autofocus>
+                                    value="{{ old('mother') }}" autofocus required>
 
                                 @error('mother')
                                 <span class="invalid-feedback" role="alert">
@@ -169,7 +169,7 @@
 
                             <div class="col-md-6">
                                 <input id="dob" type="date" class="form-control @error('dob') is-invalid @enderror"
-                                    name="dob" value="{{ old('dob') }}" autocomplete="bday">
+                                    name="dob" value="{{ old('dob') }}" autocomplete="bday" required>
 
                                 @error('dob')
                                 <span class="invalid-feedback" role="alert">
@@ -247,13 +247,15 @@
                                 <select class="form-select @error('class') is-invalid @enderror" name="class" required
                                     aria-label="Select Standard">
                                     <option value="">Select Class <span>*</span></option>
+                                    <option @if( old('class')=='Play') selected @endif value="Play" >Play</option>
                                     <option @if( old('class')=='Nursery') selected @endif value="Nursery" >Nursery</option>
                                     <option @if( old('class')=='LKG') selected @endif value="LKG">LKG</option>
                                     <option @if( old('class')=='UKG') selected @endif value="UKG">UKG</option>
-                                    <option @if( old('class')=='Std.1') selected @endif value="Std.1">Std. 1</option>
-                                    <option @if( old('class')=='Std.2') selected @endif value="Std.2">Std. 2</option>
-                                    <option @if( old('class')=='Std.3') selected @endif value="Std.3">Std. 3</option>
-                                    <option @if( old('class')=='Std.4') selected @endif value="Std.4">Std. 4</option>
+                                    <option @if( old('class')=='Std.1') selected @endif value="Std.1">Std.1</option>
+                                    <option @if( old('class')=='Std.2') selected @endif value="Std.2">Std.2</option>
+                                    <option @if( old('class')=='Std.3') selected @endif value="Std.3">Std.3</option>
+                                    <option @if( old('class')=='Std.4') selected @endif value="Std.4">Std.4</option>
+                                    <option @if( old('class')=='Std.5') selected @endif value="Std.5">Std.5</option>
                                     <!-- <option value="Std.5">Std. 5</option>
                                     <option value="Std.6">Std. 6</option>
                                     <option value="Std.7">Std. 7</option>

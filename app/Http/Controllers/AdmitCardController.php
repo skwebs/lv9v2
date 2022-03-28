@@ -48,7 +48,7 @@ class AdmitCardController extends Controller
         'mother'    => 'required',
         'father'    => 'required',
         'gender'    => 'required',
-        'dob'       => 'date|nullable',
+        'dob'       => 'date|required',
         'mobile'    => 'regex:/^[6-9][0-9]{9}/i',
         'address'   => 'required',
         'class'     => 'required', 
@@ -187,4 +187,12 @@ class AdmitCardController extends Controller
 	public function admin_homepage(){
 		return view('admin_homepage');
 	}
+	
+	public function count()
+	{
+	$data['admitCards'] = AdmitCard::orderByDesc('id')->get(); //orderBy('id','desc');
+	dd($data);
+	//return view('admitCards.index',$data);
+	}
+	
 }

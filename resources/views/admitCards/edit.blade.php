@@ -107,7 +107,7 @@
                             <div class="col-md-6">
                                 <input id="mother" type="text"
                                     class="form-control @error('mother') is-invalid @enderror" name="mother"
-                                    value="{{ old('mother', $admitCard->mother) }}" autofocus>
+                                    value="{{ old('mother', $admitCard->mother) }}" autofocus required>
 
                                 @error('mother')
                                 <span class="invalid-feedback" role="alert">
@@ -171,7 +171,7 @@
 
                             <div class="col-md-6">
                                 <input id="dob" type="date" class="form-control @error('dob') is-invalid @enderror"
-                                    name="dob" value="{{ old('dob', $admitCard->dob) }}" autocomplete="bday">
+                                    name="dob" value="{{ old('dob', $admitCard->dob) }}" autocomplete="bday" required>
 
                                 @error('dob')
                                 <span class="invalid-feedback" role="alert">
@@ -249,26 +249,16 @@
                                 <select class="form-select @error('class') is-invalid @enderror" name="class" required
                                     aria-label="Select Standard">
                                     <option value="">Select Class <span>*</span></option>
+                                    <option @if( old('class', $admitCard->class)=='Play') selected @endif value="Play" >Play</option>
                                     <option @if( old('class', $admitCard->class)=='Nursery') selected @endif value="Nursery" >Nursery</option>
                                     <option @if( old('class', $admitCard->class)=='LKG') selected @endif value="LKG">LKG</option>
                                     <option @if( old('class', $admitCard->class)=='UKG') selected @endif value="UKG">UKG</option>
-                                    <option @if( old('class', $admitCard->class)=='Std.1') selected @endif value="Std.1">Std. 1</option>
-                                    <option @if( old('class', $admitCard->class)=='Std.2') selected @endif value="Std.2">Std. 2</option>
-                                    <option @if( old('class', $admitCard->class)=='Std.3') selected @endif value="Std.3">Std. 3</option>
-                                    <option @if( old('class', $admitCard->class)=='Std.4') selected @endif value="Std.4">Std. 4</option>
-                                    <!-- <option value="Std.5">Std. 5</option>
-                                    <option value="Std.6">Std. 6</option>
-                                    <option value="Std.7">Std. 7</option>
-                                    <option value="Std.8">Std. 8</option>
-                                    <option value="Std.9">Std. 9</option>
-                                    <option value="Std.10">Std. 10</option>
-                                    <option value="Std.11">Std. 11</option>
-                                    <option value="Std.12">Std. 12</option> -->
+                                    <option @if( old('class', $admitCard->class)=='Std.1') selected @endif value="Std.1">Std.1</option>
+                                    <option @if( old('class', $admitCard->class)=='Std.2') selected @endif value="Std.2">Std.2</option>
+                                    <option @if( old('class', $admitCard->class)=='Std.3') selected @endif value="Std.3">Std.3</option>
+                                    <option @if( old('class', $admitCard->class)=='Std.4') selected @endif value="Std.4">Std.4</option>
+                                    <option @if( old('class', $admitCard->class)=='Std.5') selected @endif value="Std.5">Std.5</option>
                                 </select>
-
-                                <!-- <input id="class" type="number"
-                                    class="form-control @error('class') is-invalid @enderror" name="class" required
-                                    autocomplete="class"> -->
 
                                 @error('class')
                                 <span class="invalid-feedback" role="alert">
