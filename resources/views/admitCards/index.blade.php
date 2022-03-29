@@ -83,7 +83,7 @@
 		                                @else
 		                                    <a href="{{route('admitCard.upload_image',$admitCard->id)}}" type="button"
 		                                    class="link">
-			                                    <img height="50" src="{{asset('upload/images/students/'.$admitCard->image)}}"
+			                                    <img height="50" src="{{asset('uploads/images/students/thumbnail/'.$admitCard->image)}}"
 			                                    alt="{{$admitCard->image}}">
 		                                    </a>
 		                                @endif

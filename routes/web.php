@@ -33,9 +33,6 @@ Route::controller(AdmitCardController::class)->group(function(){
 	
 	Route::get('/admitCard/all','admit_cards')->name('admitCard.admit_cards');
 	
-	Route::get('admitCard/{admitCard}/view', 'view')->name('view');
-	
-	Route::get('admitCard/count', 'count');
 });
 
 Route::resource('admitCard', AdmitCardController::class);

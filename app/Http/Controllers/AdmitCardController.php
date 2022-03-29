@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\AdmitCard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Image;
 
 class AdmitCardController extends Controller
 {
@@ -101,6 +103,8 @@ class AdmitCardController extends Controller
      */
     public function update(Request $request, AdmitCard $admitCard)
     {
+    
+    return;
         $request->validate([
         'name'      => 'required',
         'mother'    => 'required',
@@ -157,22 +161,60 @@ class AdmitCardController extends Controller
 	
 	public function save_image(Request $request, AdmitCard $admitCard)
 	{
-			$imageName = time().'.jpg'; //$request->image->extension();  
-			
-			$request->image->move(public_path('upload/images/students'), $imageName);
-			
-			//$admitCard = AdmitCard::whereId($request->id)->first();
+		// define all paths in array
+		$paths = array(
+			'stu_img' => public_path("uploads/images/students"),
+			'thumb'   => public_path("uploads/images/students/thumbnail"),
+			'trash'   => public_path("trash"),
+		);
 		
-		$admitCard->image = $imageName;
+		// check and create paths
+		foreach($paths as $path){
+			$this->mk_dir($path);
+		}
+		// retrive first name
+		$first_name = explode(" ",$admitCard->name)[0];
+		
+		// validate input
+		$request->validate([
+			"image" => "required|image|mimes:jpg,jpeg,png|max:2048",
+		]);
+		
+		// old files
+		$old_file = $paths['stu_img']."/".$admitCard->image;
+		$old_thumb_file = $paths['thumb']."/".$admitCard->image;
+		
+		// if exist old file, move to trashed folder
+		if(!$admitCard->image == null && file_exists($old_file)){
+			rename($old_file, $paths['trash'].'/'.$admitCard->image);
+		}
+		
+		// if thumb exits delete it
+		if(!$admitCard->image == null && file_exists($old_thumb_file)){
+			unlink($old_thumb_file);
+		}
+		
+		// define new file name
+		$new_file_name = $first_name.date('_Ymd-His.').$request->image->extension();  
+	
+		$image = $request->image;
+		$img = Image::make($image->path());
+		$img->resize(100, 100, function ($constraint) {
+			$constraint->aspectRatio();
+		})->save($paths['thumb'].'/'.$new_file_name);
+		
+		$request->image->move($paths['stu_img'], $new_file_name);
+		
+		$admitCard->image = $new_file_name;
 		
 		$admitCard->save();
 		
-			//	all array data encode into json for client
-			return response()->json([
-				'success'=>true,
-				'msg'=>'Image uploaded.'
-			]);
-	
+		//	all array data encode into json for client
+		return response()->json([
+			'success'=>true,
+			'msg'=>'Image uploaded.'
+		]);
+
 	}
 	
 	public function admit_cards()
@@ -188,11 +230,11 @@ class AdmitCardController extends Controller
 		return view('admin_homepage');
 	}
 	
-	public function count()
-	{
-	$data['admitCards'] = AdmitCard::orderByDesc('id')->get(); //orderBy('id','desc');
-	dd($data);
-	//return view('admitCards.index',$data);
+	private function mk_dir($path){
+		if(!is_dir($path)){
+		/* Directory does not exist, so lets create it. */
+			mkdir($path, 0755, true);
+		}
 	}
 	
 }
