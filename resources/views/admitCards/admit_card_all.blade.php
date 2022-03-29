@@ -101,12 +101,16 @@
     .site{
 	    font-size:9px;
     }
+    svg{
+    position:absolute;
+    left:40px;
+    transform:translateY(-25px);
+    }
     </style>
 
 </head>
 
 <body>
-
     <?php  $sn = 0 ?>
     @foreach($admitCards as $admitCard)
     <?php  $sn++ ?>
@@ -168,6 +172,8 @@
                         <div class="d-inline-block px-3 py-2 h4 rounded bg-primary text-white">
                             Admit Card
                         </div>
+                        {!! QrCode::size(140,140)->generate("Name: $admitCard->name, Class: $admitCard->class, Roll: $admitCard->roll, Session: 2021-22"); !!}
+                        
                     </td>
                 </tr>
                 <tr>
@@ -237,8 +243,9 @@
                                     <table class="table table-borderless">
                                         <tr>
                                             <td width="100">
-                                                <img class="border border-dark"  height="145" src="@if($admitCard->image==null) {{ asset('images/web/paste-image.webp') }} @else {{ asset('upload/images/students/'.$admitCard->image) }} @endif "
+                                               <img class="border border-dark"  height="145" src="@if($admitCard->image==null) {{ asset('images/web/paste-image.webp') }} @else {{ asset('upload/images/students/'.$admitCard->image) }} @endif "
                                                     alt="{{$admitCard->image}}" />
+                                                    
                                                 @if($admitCard->image != null)
                                             	    <img class="seal-on-pic" src="{{asset('images/web/ama_seal300.webp')}}">
                                                 @endif

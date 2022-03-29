@@ -6,6 +6,7 @@ use App\Models\AdmitCard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Image;
+use SimpleSoftwareIO\QrCode\Facades\QrCode; 
 
 class AdmitCardController extends Controller
 {
