@@ -104,8 +104,6 @@ class AdmitCardController extends Controller
      */
     public function update(Request $request, AdmitCard $admitCard)
     {
-    
-    return;
         $request->validate([
         'name'      => 'required',
         'mother'    => 'required',
