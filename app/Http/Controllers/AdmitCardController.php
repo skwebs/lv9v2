@@ -24,7 +24,7 @@ class AdmitCardController extends Controller
     public function index()
     {
         $data['admitCards'] = AdmitCard::orderByDesc('id')->get(); //orderBy('id','desc');
-       // dd($data);
+       //dd($data);
         return view('admitCards.index',$data);
     }
 
@@ -218,7 +218,7 @@ class AdmitCardController extends Controller
 	
 	public function admit_cards()
 	{
-		$data['admitCards'] = AdmitCard::orderByDesc('class')->get(); //orderBy('id','desc');
+		$data['admitCards'] = AdmitCard::orderByDesc('class')->where('image','!=',null)->get(); //orderBy('id','desc');
 		//dd($data);
 		return view('admitCards.admit_card_all',$data);
 	}

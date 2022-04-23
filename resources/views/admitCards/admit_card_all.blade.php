@@ -34,7 +34,7 @@
         }
 
         .admit-card {
-            background: linear-gradient(rgba(250, 250, 250, 0.9),
+            background: linear-gradient(rgba(250, 250, 250, 0.85),
                 rgba(255, 255, 255, 0.85)),
             url("{{asset('images/web/ama300.webp')}}") center/60px 60px round;
             /* box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); */
@@ -58,6 +58,7 @@
         margin-bottom: 0 !important;
         padding-top: 0 !important;
         padding-bottom: 0 !important;
+        border:2px solid black !important;
     }
 
 
@@ -106,6 +107,7 @@
     left:40px;
     transform:translateY(-25px);
     }
+    
     </style>
 
 </head>
@@ -115,7 +117,7 @@
     @foreach($admitCards as $admitCard)
     <?php  $sn++ ?>
 
-    <div style="width: 735px" height="518" class="card admit-card mx-auto">
+    <div style="width: 735px" height="518" class="card admit-card mx-auto border">
         <div class="card-body">
             <!-- MAIN TABLE -->
             <table>
@@ -199,7 +201,7 @@
                                                         <td>Name</td>
                                                         <td>
                                                             :
-                                                            <strong>{{$admitCard->name}}</strong>
+                                                            <strong>{{ strtoupper($admitCard->name) }}</strong>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -207,7 +209,7 @@
                                                             Father's Name
                                                         </td>
                                                         <td>
-                                                            : <strong>{{$admitCard->father}}</strong>
+                                                            : <strong>{{ strtoupper($admitCard->father) }}</strong>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -243,7 +245,7 @@
                                     <table class="table table-borderless">
                                         <tr>
                                             <td width="100">
-                                               <img class="border border-dark"  height="145" src="@if($admitCard->image==null) {{ asset('images/web/paste-image.webp') }} @else {{ asset('upload/images/students/'.$admitCard->image) }} @endif "
+                                               <img class="border border-dark"  height="145" src="@if($admitCard->image==null) {{ asset('images/web/paste-image.webp') }} @else {{ asset('uploads/images/students/'.$admitCard->image) }} @endif "
                                                     alt="{{$admitCard->image}}" />
                                                     
                                                 @if($admitCard->image != null)
@@ -285,7 +287,9 @@
                
             </table>
             <!-- //MAIN -->
-	            <div class="site text-center" >For more info log on <a href="https://anshumemorial.in" >www.anshumemorial.in</a> or write us on <a href="mailto:anshumemorial@gmail.com" >anshumemorial@gmail.com</a></div>
+	            <div class="site text-center" >
+	            <div>For more info log on <a href="https://anshumemorial.in" >www.anshumemorial.in</a> or write us on <a href="mailto:contact@anshumemorial.in" >contact@anshumemorial.in</a></div>
+	            </div>
 	            
         </div>
     </div>

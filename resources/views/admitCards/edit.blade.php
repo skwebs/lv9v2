@@ -248,7 +248,7 @@
 
                                 <select class="form-select @error('class') is-invalid @enderror" name="class" required
                                     aria-label="Select Standard">
-                                    <option value="">Select Class <span>*</span></option>
+                                    <option value="">Select Class</option>
                                     <option @if( old('class', $admitCard->class)=='Play') selected @endif value="Play" >Play</option>
                                     <option @if( old('class', $admitCard->class)=='Nursery') selected @endif value="Nursery" >Nursery</option>
                                     <option @if( old('class', $admitCard->class)=='LKG') selected @endif value="LKG">LKG</option>

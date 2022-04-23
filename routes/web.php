@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdmitCardController;
+use App\Http\Controllers\ResultController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,8 @@ Route::controller(AdmitCardController::class)->group(function(){
 });
 
 Route::resource('admitCard', AdmitCardController::class);
+//result
+Route::resource('result', ResultController::class);
 
 Route::group(['middleware' => 'prevent-back-history'],function(){
 	Auth::routes();
