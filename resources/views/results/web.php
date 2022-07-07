@@ -39,12 +39,9 @@ Route::controller(AdmitCardController::class)->group(function(){
 Route::resource('admitCard', AdmitCardController::class);
 //result
 Route::controller(ResultController::class)->group(function(){
+	Route::get('/student/roll','stu_roll')->name('student.roll');
+	Route::get('/student/{result}','show_result')->name('student.marksheet');
 	Route::get('/student/result','stu_result');
-	Route::post('/student/roll','stu_roll')->name('student.roll');
-	Route::post('/student/marksheet','show_result')->name('student.marksheet');
-	Route::get('/student/{id}','print_marksheet')->name('print_ms');
-	Route::get('student','set_stu_position');
-	Route::get('/all-result','all_result');
 });
 Route::resource('result', ResultController::class)->middleware('auth');
 

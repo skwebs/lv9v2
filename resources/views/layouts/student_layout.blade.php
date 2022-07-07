@@ -116,6 +116,8 @@
             @yield('content')
         </main>
     </div>
+    @yield('btm-js')
+     
 </body>
 
 </html>

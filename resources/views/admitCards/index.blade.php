@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid mt-4">
     <div class="row">
         <div class="d-flex flex-column justify-content-center">
         @if ($message = session('success'))

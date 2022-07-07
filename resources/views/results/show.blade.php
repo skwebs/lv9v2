@@ -164,12 +164,14 @@ function numToText($num)
 	
 	//var_dump($result);
 	$qr;
-	$qr = 
+	$qr = <<<QRDATA
 	"Name: {$stu->name}, Father's Name: {$stu->father}, Mother: {$stu->mother}, 
 	Session: {$result->session}, 
 	Class: {$stu->class}, Roll: {$stu->roll},
 	Obtained Marks: {$result->total}/{$result->full_marks}, 
-	marks:";
+	Position in class: {$result->position}
+	marks:"
+	QRDATA;
 	$marks = (array) $result->marks;
 	$qr.= json_encode($marks);
 	
@@ -181,7 +183,7 @@ function numToText($num)
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=750, initial-scale=1.0" />
+    <!--<meta name="viewport" content="width=750, initial-scale=1.0" />
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -199,6 +201,9 @@ function numToText($num)
           /*Firefox*/
           margin: 0;
         }
+        #print{
+        display:none;
+        }
       }
       *{
       margin:0;
@@ -212,14 +217,30 @@ function numToText($num)
         width: 735px;
 	      background: linear-gradient(rgba(250, 250, 250, 0.85),
 	      rgba(255, 255, 255, 0.85)),
-	      url("https://v1.anshumemorial.in/assets/static/img/ama/ama-128x128.png") center/60px 60px round;
+	      url("{{asset('images/web/ama300.webp')}}") center/60px 60px round;
       }
       
       .table, .table > td, .table > th{
       margin:0 !important;
       }
       a{text-decoration:none;}
-      
+      .p-seal{
+  	      position:relative;
+  	      bottom:-10px;
+  	      width:190px;
+      }
+      .p-sign{
+	      position:absolute;
+	      bottom:70px;
+	      right:70px;
+	      width:80px;
+      }
+      .exam-ctrl{
+  	      position:absolute;
+  	      width:170px;
+  	      right:210px;
+  	      bottom:20px;
+      }
     </style>
   <body>
     <table style="margin-bottom:-6px"  class="main-table mx-auto">
@@ -241,7 +262,7 @@ function numToText($num)
           <table class="mx-auto px-2" style="width: 100%;">
             <tr>
               <td style="width:75px;padding-left:10px">
-                <img class="float-end" width="75px" height="75px" src="https://v1.anshumemorial.in/assets/static/img/ama/ama-128x128.png" alt="" srcset="" />
+                <img class="float-end" width="75px" height="75px" src="{{asset('images/web/ama300.webp')}}" alt="" srcset="" />
               </td>
               <td style="width: 100%">
                 <table style="width: 100%">
@@ -265,7 +286,7 @@ function numToText($num)
                 </table>
               </td>
               <td style="width:75px; padding-right:10px">
-                <img class="float-start" width="75px" height="75px" src="https://v1.anshumemorial.in/assets/static/img/bbbp512.png" alt="" srcset="" />
+                <img class="float-start" width="75px" height="75px" src="{{asset('images/web/bbbp300.webp')}}" alt="" srcset="" />
               </td>
             </tr>
           </table>
@@ -432,7 +453,7 @@ function numToText($num)
                 <table width="100%" >
                   <tr>
                     <td class="border" colspan="3">
-                    {!! QrCode::size(180,180)->gradient(75,0,130,53,50,20,'diagonal')->margin(2)->generate($qr); !!}
+                    {!! QrCode::size(180,180)->margin(2)->generate($qr); !!}
                     </td>
                   </tr>
                   <tr>
@@ -487,18 +508,21 @@ function numToText($num)
       </tr>
       <tr>
         <!-- office section -->
-        <td class="align-bottom"  style="height:185px;">
+        <td class="align-bottom"  style="height:185px;position:relative;">
 	        <table class="table table-sm table-borderless text-center" >
 		        <tr>
-		        <td>{{ date('d-m-Y')}}</td>
-		        <td></td>
-		        <td></td>
-		        <td></td>
+			        <td width="25%" class="align-bottom" >{{ date('d-m-Y')}}</td>
+			        <td width="25%" ></td>
+			        <td width="25%" ><img class="exam-ctrl"  src="https://anshumemorial.in/v2/public/images/web/chandani_roy512.webp" ></td>
+			        <td width="25%" >
+				        <img class="p-sign" src="https://anshumemorial.in/v2/public/images/web/principal_sign300.webp" >
+				        <img class="p-seal"  src="https://anshumemorial.in/v2/public/images/web/principal_seal400.webp" >
+			        </td>
 		        </tr>
 		        <tr>
-			        <td>Date</td>
-			        <td>Teacher</td>
-			        <td>Exam Incharge</td>
+			        <td>Print Date</td>
+			        <td>Class Teacher</td>
+			        <td>Exam Controller</td>
 			        <td>Principal</td>
 		        </tr>
 	        </table>
@@ -533,5 +557,14 @@ function numToText($num)
       </tr>
     </table>
     <small style="font-size:10px;"  class="align-baseline w-100 text-center d-inline-block bg-light" >Designed &amp; Developed by <a href="#" >Anshu Memorial Academy</a> (IT Team)</small>
+    
+    <div class="d-flex justify-content-center" >
+    <button id="print" class="btn btn-primary btn-lg mt-4"  >Print</button>
+  <script type="text/javascript">
+  "use strict";
+  document.getElementById('print').addEventListener('click',()=>{
+	  window.print();
+  })
+  </script>
   </body>
 </html>

@@ -13,7 +13,7 @@ class ResultController extends Controller
     
     public function __construct()
     {
-	    $this->middleware('auth');
+	    //$this->middleware('auth');
 	    
 	    $this->classes = ['Play', 'Nursery', 'LKG'];
 	    
@@ -107,6 +107,16 @@ class ResultController extends Controller
 	        'uploaded_by_id' => auth()->user()->id,
         ];
         //dd($data);
+        if(Result::where([
+	        'session' => $request->query('session'),
+	        'class' => $request->query('class'),
+	        'roll' => $request->query('roll')
+        ])){
+	        return redirect($request->query('redirect_to'))
+	        ->with('warning','Result already has uploaded!');
+        }
+        
+        
         Result::create($data);
         
         //return redirect()->route('result.index')
@@ -228,6 +238,75 @@ class ResultController extends Controller
         //
     }
     
+    public function stu_result(Request $req){
+	    return view('results.stu_result');
+    }
+	public function stu_roll(Request $req){
+		//$r=Result::select('roll')->where(['class'=>'Play'])->orderBy('roll')->get();
+	    if($req->stu_class == ""){
+		    return '<span class="text-danger">Please select a class</span>';
+	    }
+	    $r=Result::select('id','roll')->where(['class'=>$req->stu_class])->orderBy('roll')->get();
+	    $select ;
+	    $select = '<select id="select-roll" class="form-select">';
+	    $select .= '<option value="" >Select Roll No.</option>';
+	    //dd($r);
+	    foreach($r as $roll){
+	    $select .= '<option value="'.$roll->id.'" >'.$roll->roll.'</option>';
+	    }
+	    $select .='</select>';
+	    return $select;
+    }
     
+    public function show_result(Request $req)
+    {
+        $result = Result::find($req->id);
+        $stu=AdmitCard::find($result->admit_card_id);
+        $classes=$this->classes;
+        return view('results.student_result_page', compact('result','stu','classes'));
+    }
+    public function print_marksheet($id)
+    {
+	    $result = Result::find($id);
+	    $stu=AdmitCard::find($result->admit_card_id);
+	    $classes=$this->classes;
+	    return view('results.student_result_page', compact('result','stu','classes'));
+	    
+    }
+    
+    public function set_stu_position(Request $req)
+    {
+	    $classes = ['Play', 'Nursery', 'LKG','UKG','Std.1','Std.2','Std.3','Std.4'];
+	    $res = new Result;
+	    
+	    foreach($classes as $c){
+		    echo '<hr>'.$c;
+		    $p=1;
+		    $res2=$res->where(['class'=>$c])->orderByDesc('total')->get();
+		    $t= "<table><tr><th>Roll No.</th><th>Marks</th><th>Position</th>";
+		    foreach($res2 as $r){
+			    $t .= "<tr><td>{$r->roll}</td><td>{$r->total}</td><td>{$r->position}</td></tr>";
+			    if($req->query('set')=='pos'){
+				    $ru=Result::find($r->id);
+				    $ru->position = $p;
+				    $ru->update();
+				    $p++;
+			    }
+		    }
+		    $t .= "</tr></table>";
+		    echo $t;
+	    }
+    }
+    
+    
+    public function all_result()
+    {
+    $r= AdmitCard::all();
+	    //$r=AdmitCard::with('result')->get();
+	    //$r=Result::with('admitCard')->get();
+	    //dd($r->admitCard);
+	    dd($r);
+	    
+    }
 
 }

@@ -42,9 +42,7 @@ Route::controller(ResultController::class)->group(function(){
 	Route::get('/student/result','stu_result');
 	Route::post('/student/roll','stu_roll')->name('student.roll');
 	Route::post('/student/marksheet','show_result')->name('student.marksheet');
-	Route::get('/student/{id}','print_marksheet')->name('print_ms');
-	Route::get('student','set_stu_position');
-	Route::get('/all-result','all_result');
+	Route::get('/student/print-mrksheet/{id}','print_marksheet')->name('student.printMarksheet');
 });
 Route::resource('result', ResultController::class)->middleware('auth');
 

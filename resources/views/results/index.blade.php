@@ -7,6 +7,9 @@
 
 @endsection
 
+@section('js')
+@endsection
+
 @php
 	$classes = array(
 	'Play','LKG','UKG','Nursery','Std.1','Std.2','Std.3','Std.4','Std.5'
@@ -17,20 +20,11 @@
 <div class="container-fluid py-3">
     <form class="row mb-2"  action="{{ route('result.index') }}" >
 	    <div class="col-6" >
-	    <select class="form-select"  name="class" >
+	    <select id="select-class" onchange="selectCls(this)"  class="form-select"  name="class" >
 		    <option value="" >All Class</option>
 		    @foreach($classes as $c)
 		    <option @selected(request()->query('class')===$c) value="{{$c}}" >{{$c}}</option>
 		    @endforeach
-		    <!--<option value="LKG" >LKG</option>
-		    <option value="UKG" >UKG</option>
-		    <option value="Nursery" >Nursery</option>
-		    <option value="Std.1" >Std.1</option>
-		    <option value="Std.2" >Std.2</option>
-		    <option value="Std.3" >Std.3</option>
-		    <option value="Std.4" >Std.4</option>
-		    <option value="Std.5" >Std.5</option>
-		    -->
 	    </select>
 	    </div>
 	    <button class="btn btn-primary col-5"  type="submit" >Go</button>
@@ -51,13 +45,6 @@
 
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                    <a href="{{ route('result.create') }}" class=" btn btn-primary">
-	                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
-		                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-		                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-	                    <span class="d-none d-md-inline" > &nbsp; Add Student</span>
-	                    </svg>
-                    </a>
                     
                     <h2 class="text-center" >Students List</h2>
                     
@@ -160,4 +147,11 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+function selectCls(e){
+alert(e.target.value);
+
+}
+</script>
+
 @endsection

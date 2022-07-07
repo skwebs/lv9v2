@@ -50,7 +50,7 @@ $height = $width/$ratio;
 @endsection
 
 @section('content')
-<div class="container" style="overflow:hidden;">
+<div class="container mt-4" style="overflow:hidden;">
   <div>
     <div class="row">
       <div class="col-md-6 mx-auto">
@@ -82,7 +82,7 @@ $height = $width/$ratio;
             <h3>Image preview</h3>
             <div class="image_wrapper border">
               <label class="label" data-toggle="tooltip" title="Change image">
-                <img id="avatar" src="@if($admitCard->image == null) {{asset('images/web/select-an-image.webp')}} @else {{asset('upload/images/students/'.$admitCard->image)}} @endif" alt="crop image">
+                <img id="avatar" src="@if($admitCard->image == null) {{asset('images/web/select-an-image.webp')}} @else {{asset('uploads/images/students/'.$admitCard->image)}} @endif" alt="crop image">
                 <!--<img id="avatar" src="https://skwebs.github.io/cropper-and-php/assets/img/select-an-image.jpg" alt="crop image" >-->
                 <input type="file" class="visually-hidden" id="input" name="image" accept="image/png,image/jpeg,">
               </label>

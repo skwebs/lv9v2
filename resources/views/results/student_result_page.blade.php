@@ -164,14 +164,13 @@ function numToText($num)
 	
 	//var_dump($result);
 	$qr;
-	$qr = <<<QRDATA
+	$qr = 
 	"Name: {$stu->name}, Father's Name: {$stu->father}, Mother: {$stu->mother}, 
 	Session: {$result->session}, 
 	Class: {$stu->class}, Roll: {$stu->roll},
 	Obtained Marks: {$result->total}/{$result->full_marks}, 
 	Position in class: {$result->position}
-	marks:"
-	QRDATA;
+	marks:";
 	$marks = (array) $result->marks;
 	$qr.= json_encode($marks);
 	
@@ -201,7 +200,7 @@ function numToText($num)
           /*Firefox*/
           margin: 0;
         }
-        #print{
+        .d-print-none{
         display:none;
         }
       }
@@ -217,30 +216,14 @@ function numToText($num)
         width: 735px;
 	      background: linear-gradient(rgba(250, 250, 250, 0.85),
 	      rgba(255, 255, 255, 0.85)),
-	      url("{{asset('images/web/ama300.webp')}}") center/60px 60px round;
+	      url("https://v1.anshumemorial.in/assets/static/img/ama/ama-128x128.png") center/60px 60px round;
       }
       
       .table, .table > td, .table > th{
       margin:0 !important;
       }
       a{text-decoration:none;}
-      .p-seal{
-  	      position:relative;
-  	      bottom:-10px;
-  	      width:190px;
-      }
-      .p-sign{
-	      position:absolute;
-	      bottom:70px;
-	      right:70px;
-	      width:80px;
-      }
-      .exam-ctrl{
-  	      position:absolute;
-  	      width:170px;
-  	      right:210px;
-  	      bottom:20px;
-      }
+      
     </style>
   <body>
     <table style="margin-bottom:-6px"  class="main-table mx-auto">
@@ -262,7 +245,7 @@ function numToText($num)
           <table class="mx-auto px-2" style="width: 100%;">
             <tr>
               <td style="width:75px;padding-left:10px">
-                <img class="float-end" width="75px" height="75px" src="{{asset('images/web/ama300.webp')}}" alt="" srcset="" />
+                <img class="float-end" width="75px" height="75px" src="https://v1.anshumemorial.in/assets/static/img/ama/ama-128x128.png" alt="" srcset="" />
               </td>
               <td style="width: 100%">
                 <table style="width: 100%">
@@ -286,7 +269,7 @@ function numToText($num)
                 </table>
               </td>
               <td style="width:75px; padding-right:10px">
-                <img class="float-start" width="75px" height="75px" src="{{asset('images/web/bbbp300.webp')}}" alt="" srcset="" />
+                <img class="float-start" width="75px" height="75px" src="https://v1.anshumemorial.in/assets/static/img/bbbp512.png" alt="" srcset="" />
               </td>
             </tr>
           </table>
@@ -508,19 +491,16 @@ function numToText($num)
       </tr>
       <tr>
         <!-- office section -->
-        <td class="align-bottom"  style="height:185px;position:relative;">
+        <td class="align-bottom"  style="height:130px;">
 	        <table class="table table-sm table-borderless text-center" >
 		        <tr>
-			        <td width="25%" class="align-bottom" >{{ date('d-m-Y')}}</td>
-			        <td width="25%" ></td>
-			        <td width="25%" ><img class="exam-ctrl"  src="https://anshumemorial.in/v2/public/images/web/chandani_roy512.webp" ></td>
-			        <td width="25%" >
-				        <img class="p-sign" src="https://anshumemorial.in/v2/public/images/web/principal_sign300.webp" >
-				        <img class="p-seal"  src="https://anshumemorial.in/v2/public/images/web/principal_seal400.webp" >
-			        </td>
+		        <td>{{ date('d-m-Y')}}</td>
+		        <td></td>
+		        <td></td>
+		        <td></td>
 		        </tr>
 		        <tr>
-			        <td>Print Date</td>
+			        <td>Date</td>
 			        <td>Class Teacher</td>
 			        <td>Exam Controller</td>
 			        <td>Principal</td>
@@ -558,8 +538,23 @@ function numToText($num)
     </table>
     <small style="font-size:10px;"  class="align-baseline w-100 text-center d-inline-block bg-light" >Designed &amp; Developed by <a href="#" >Anshu Memorial Academy</a> (IT Team)</small>
     
-    <div class="d-flex justify-content-center" >
-    <button id="print" class="btn btn-primary btn-lg mt-4"  >Print</button>
+    
+    
+    
+    <div class="d-flex justify-content-around mt-4" >
+	    
+	    <a href="{{url()->previous()}}" class="btn btn-danger btn-lg d-print-none" >
+		    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+			    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+		    </svg> 
+		    Go Back
+	    </a>
+	    <button id="print"  class="btn btn-primary btn-lg d-print-none"  >Print</button>
+    
+    </div>
+    
+    
+    
   <script type="text/javascript">
   "use strict";
   document.getElementById('print').addEventListener('click',()=>{
